@@ -8,5 +8,13 @@
 </head>
 <body>
 	<h1>Index Page</h1>
+	<a href="./member/memberLogin.do">Member Login</a>
+	
+	<form action="./member/memberLogin.do" method="get">
+		<input type="text" name="id">
+		<input type="password" name="pw">
+		<button>Login</button>
+	</form>
+	
 </body>
 </html>
