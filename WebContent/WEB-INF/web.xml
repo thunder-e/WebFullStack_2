@@ -22,5 +22,15 @@
 	</servlet-mapping>
 
 
+	<servlet>
+		<servlet-name>bankbook</servlet-name>
+		<servlet-class>com.sunwoo.s1.bankbook.BankbookController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>bankbook</servlet-name>
+		<url-pattern>/bankbook/bankbookList.do</url-pattern>
+	</servlet-mapping>
+
 
 </web-app>

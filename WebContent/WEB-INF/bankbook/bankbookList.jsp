@@ -16,10 +16,8 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -44,40 +42,6 @@
 			</ul>
 		</div>
 	</nav>
-
-
-	<h1>Member Login Page</h1>
-
-	<form class="form-horizontal" action="/action_page.php">
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="id">ID:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="id"
-					placeholder="Enter ID">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="pw">Password:</label>
-			<div class="col-sm-10">
-				<input type="password" class="form-control" id="pw"
-					placeholder="Enter password">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<div class="checkbox">
-					<label><input type="checkbox"> Remember me</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Submit</button>
-			</div>
-		</div>
-	</form>
-
-
 
 
 
