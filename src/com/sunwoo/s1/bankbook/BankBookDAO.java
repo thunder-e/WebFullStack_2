@@ -9,6 +9,50 @@ import java.util.List;
 
 public class BankBookDAO {
 	
+	public BankBookDTO getSelect(long bookNumber)throws Exception{
+		//1. 로그인 정보 
+		String user="user01";
+		String password="user01";
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
+		String driver = "oracle.jdbc.driver.OracleDriver";
+
+		//2. 클래스 로딩
+		Class.forName(driver);
+
+		//3. 로그인 Connection
+		Connection con = DriverManager.getConnection(url, user, password);
+		
+		String sql =" select * from bankbook where booknumber = ?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setLong(1, bookNumber);
+		
+		ResultSet rs = st.executeQuery();
+		
+		BankBookDTO bankBookDTO= null;
+		
+		if(rs.next()) {
+			bankBookDTO = new BankBookDTO();
+			bankBookDTO.setBookNumber(rs.getLong("bookNumber"));
+			bankBookDTO.setBookName(rs.getString("bookName"));
+			bankBookDTO.setBookRate(rs.getDouble("bookRate"));
+			bankBookDTO.setBookSale(rs.getString("bookSale"));
+			
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return bankBookDTO;
+
+	}	
+
+	
+	
+	
+	
 	//getList
 	//bankbook table의 모든 데이터 조회 후 리턴
 	public List<BankBookDTO> getList() throws Exception {
@@ -32,33 +76,27 @@ public class BankBookDAO {
 		String sql = "select * from bankbook";
 		
 		//5. 미리 보내기
+
+
 		PreparedStatement st = con.prepareStatement(sql);
-		
-		//6. ? 세팅
-		
-		//7. 최종전송 후 처리
+
 		ResultSet rs = st.executeQuery();
-		
+		System.out.println("executeQuery----------");
 		while(rs.next()) {
+			System.out.println("count");
 			BankBookDTO bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBooknumber(rs.getLong("booknumber"));
-			bankBookDTO.setBookname(rs.getString("bookname"));
-			bankBookDTO.setBookrate(rs.getDouble("bookrate"));
-			bankBookDTO.setBooksale(rs.getString("booksale"));
+			bankBookDTO.setBookNumber(rs.getLong("bookNumber"));
+			bankBookDTO.setBookName(rs.getString("bookName"));
+			bankBookDTO.setBookRate(rs.getDouble("bookRate"));
+			bankBookDTO.setBookSale(rs.getString("bookSale"));
 			ar.add(bankBookDTO);
 		}
-		
-	
-		//8. 연결 해제
+
 		rs.close();
 		st.close();
 		con.close();
-		
-		
+
 		return ar;
-		
-		
-		
 		
 		
 	}

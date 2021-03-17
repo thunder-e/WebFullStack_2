@@ -2,35 +2,34 @@ package com.sunwoo.s1.bankbook;
 
 public class BankBookDTO {
 	
-	private long booknumber;
-	private String bookname;
-	private double bookrate;
-	private String booksale;
+	private long bookNumber;
+	private String bookName;
+	private double bookRate;
+	private String bookSale;
 	
-	public long getBooknumber() {
-		return booknumber;
+	public long getBookNumber() {
+		return bookNumber;
 	}
-	public void setBooknumber(long booknumber) {
-		this.booknumber = booknumber;
+	public void setBookNumber(long bookNumber) {
+		this.bookNumber = bookNumber;
 	}
-
-	public String getBookname() {
-		return bookname;
+	public String getBookName() {
+		return bookName;
 	}
-	public void setBookname(String bookname) {
-		this.bookname = bookname;
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
 	}
-	public double getBookrate() {
-		return bookrate;
+	public double getBookRate() {
+		return bookRate;
 	}
-	public void setBookrate(double bookrate) {
-		this.bookrate = bookrate;
+	public void setBookRate(double bookRate) {
+		this.bookRate = bookRate;
 	}
-	public String getBooksale() {
-		return booksale;
+	public String getBookSale() {
+		return bookSale;
 	}
-	public void setBooksale(String booksale) {
-		this.booksale = booksale;
+	public void setBookSale(String bookSale) {
+		this.bookSale = bookSale;
 	}
-
+	
 }

@@ -30,11 +30,10 @@ public class BankBookController extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	//Controller 객체 생성 후 자동 호출되는 초기화 메서드
+    	//Controller 객체 생성 후 자동 호출 되는 초기화 메서드
     	bankBookService = new BankBookService();
     	BankBookDAO bankBookDAO = new BankBookDAO();
     	bankBookService.setBankBookDAO(bankBookDAO);
-    	
     }
 
 
@@ -43,38 +42,38 @@ public class BankBookController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//MemberController 참조
-		System.out.println("BankBook Controller!!!!");
 		
-		//	/WebFullStack_2/bankbook/bankbookList.do
+		//  /WebFullStack_2/bankbook/bankbookList.do
 		String uri = request.getRequestURI();
 		
-		//subString으로 마지막주소 가져오기
-		//1. 자르려고 하는 인덱스번호 찾기
-		int index = uri.lastIndexOf("/");
+		System.out.println(uri);
 		
-		//2. 해당 인덱스부터 잘라오기
-		uri = uri.substring(index+1); //bankbookList.do
-	
-		ActionFoward actionFoward = null;
+		int index = uri.lastIndexOf("/");
+		uri = uri.substring(index+1);//   bankbookList.do
+		
+		System.out.println(uri);
+		
+		ActionFoward actionFoward=null;
+		
 		
 		try {
 			if(uri.equals("bankbookList.do")) {
-				actionFoward = bankBookService.getList(request); //actionFoward - path정보, true false정보
+				actionFoward = bankBookService.getList(request);
+			}else if(uri.equals("bankbookSelect.do")) {
+				actionFoward = bankBookService.getSelect(request);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		}catch (Exception e) {
+			System.out.println("error");
+			e.printStackTrace();
 		}
 		
-		//forward, redirect
+		//forward, Redirect
 		if(actionFoward.isCheck()) {
-			//forward
 			RequestDispatcher view = request.getRequestDispatcher(actionFoward.getPath());
 			view.forward(request, response);
-		} else {
-			//redirect
+		}else {
 			response.sendRedirect(actionFoward.getPath());
 		}
-		
 		
 		
 	}

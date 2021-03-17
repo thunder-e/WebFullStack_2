@@ -8,24 +8,45 @@ import com.sunwoo.s1.util.ActionFoward;
 
 public class BankBookService {
 	//멤버변수로 선언 -> 다른 메서드에서도 쓸 수 있게. 객체는 하나만 있으면 되니까
-	private BankBookDAO bankBookDAO;
+		
+		private BankBookDAO bankBookDAO;
+		
+		
+		
+		public void setBankBookDAO(BankBookDAO bankBookDAO) {
+			this.bankBookDAO = bankBookDAO;
+		}
 
-	public void setBankBookDAO(BankBookDAO bankBookDAO) {
-		this.bankBookDAO = bankBookDAO;
+
+		public ActionFoward getSelect(HttpServletRequest request)throws Exception{
+			ActionFoward actionFoward = new ActionFoward();
+			
+			long bookNumber = Long.parseLong(request.getParameter("bookNumber"));
+			
+			BankBookDTO bankBookDTO = bankBookDAO.getSelect(bookNumber);
+			
+			actionFoward.setCheck(true);
+			actionFoward.setPath("../WEB-INF/bankbook/bankbookSelect.jsp");
+			request.setAttribute("dto", bankBookDTO);
+			
+			return actionFoward;
+		}
+		
+
+		//getList dao의 getList 호출 
+		public ActionFoward getList(HttpServletRequest request)throws Exception{
+			ActionFoward actionFoward = new ActionFoward();
+			List<BankBookDTO> ar = bankBookDAO.getList();
+			
+			request.setAttribute("list", ar);
+			actionFoward.setPath("../WEB-INF/bankbook/bankbookList.jsp");
+			actionFoward.setCheck(true);
+			
+			
+			return actionFoward;
+		}
+		
+
 	}
 	
-	//getList dao의 getList 호출  action
-	public ActionFoward getList(HttpServletRequest request) throws Exception {
-		ActionFoward actionFoward = new ActionFoward();
-		List<BankBookDTO> ar = bankBookDAO.getList();
-		
-		request.setAttribute("list", ar);
-		actionFoward.setPath("../WEB-INF/bankbook/bankbookList.jsp"); //상대경로를 적을 때 현재위치
-		actionFoward.setCheck(true); //true-forward false-redirect 
-		//
-		
-		return actionFoward;
-	}
-	
-	
-}
+

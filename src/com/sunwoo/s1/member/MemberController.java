@@ -58,7 +58,7 @@ public class MemberController extends HttpServlet {
 		System.out.println(result);
 		String pathInfo="";
 		
-		ActionFoward actionFoward = null;
+		ActionFoward actionFoward=null;
 		
 		if(result.equals("memberLogin.do")) {
 			System.out.println("로그인 처리");
@@ -69,8 +69,8 @@ public class MemberController extends HttpServlet {
 				System.out.println("에러 발생");
 				e.printStackTrace();
 			}
-			
-		} else if(result.equals("memberJoin.do")) {
+					
+		}else if(result.equals("memberJoin.do")) {
 
 			try {
 				actionFoward = memberService.memberJoin(request);
@@ -79,21 +79,21 @@ public class MemberController extends HttpServlet {
 				System.out.println("에러 발생");
 				e.printStackTrace();
 			}
-
-		} else {
+			
+			
+		}else {
 			System.out.println("그 외 다른 처리");
 		}
-
-
+		
 		if(actionFoward.isCheck()) {
-			//foword
+			//foward
 			RequestDispatcher view = request.getRequestDispatcher(actionFoward.getPath());
 			view.forward(request, response);
-		} else {
+		}else {
 			//redirect
 			response.sendRedirect(actionFoward.getPath());
 		}
-
+		
 	}
 
 	/**

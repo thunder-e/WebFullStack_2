@@ -8,6 +8,8 @@ public class MemberService {
 	
 	private MemberDAO memberDAO;
 	
+	
+	
 	public void setMemberDAO(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
 	}
@@ -36,10 +38,8 @@ public class MemberService {
 	}
 	
 	
-	
 
-	public ActionFoward memberJoin(HttpServletRequest request) throws Exception {
-		//System.out.println("memberService ");
+	public ActionFoward memberJoin(HttpServletRequest request)throws Exception{
 		ActionFoward actionFoward = new ActionFoward();
 		String method = request.getMethod();
 		actionFoward.setPath("../WEB-INF/member/memberJoin.jsp");
@@ -49,16 +49,15 @@ public class MemberService {
 			memberDTO.setId(request.getParameter("id"));
 			memberDTO.setPw(request.getParameter("pw"));
 			memberDTO.setName(request.getParameter("name"));
-			memberDTO.setPhone(request.getParameter("phone"));
 			memberDTO.setEmail(request.getParameter("email"));
+			memberDTO.setPhone(request.getParameter("phone"));
 			int result = memberDAO.memberJoin(memberDTO);
 			actionFoward.setPath("../index.do");
 			actionFoward.setCheck(false);
 		}
 		
-		return actionFoward;
 		
+		return actionFoward;
 	}
-	
 
 }
