@@ -20,11 +20,14 @@ public class BankBookService {
 		public ActionFoward getWrite(HttpServletRequest request) throws Exception {
 			ActionFoward actionFoward = new ActionFoward();
 			String method = request.getMethod();
+			System.out.println("setWrite");
+			//GET
 			actionFoward.setPath("../WEB-INF/bankbook/bankbookWrite.jsp");
 			actionFoward.setCheck(true); 
-			if(method.toUpperCase().equals("GET")) {
+			if(method.toUpperCase().equals("POST")) {		//get으로 해서 500 오류났었음
 				BankBookDTO bankBookDTO = new BankBookDTO();
-				bankBookDTO.setBookNumber(Long.parseLong(request.getParameter("bookNumber")));
+				//입력은 3개하는데 bookNumber은 없으니까 파라미터의 값은 String의 기본값인 null -> 오류
+
 				bankBookDTO.setBookName(request.getParameter("bookName"));
 				bankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")));
 				bankBookDTO.setBookSale(request.getParameter("bookSale"));
