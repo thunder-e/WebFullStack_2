@@ -22,7 +22,6 @@ public class BankBookDAO {
 		
 		String sql = "insert into bankbook values (bank_seq.nextval, ?, ?, ?)";
 		
-		
 		PreparedStatement st = con.prepareStatement(sql);
 		
 		st.setString(1, bankBookDTO.getBookName());
