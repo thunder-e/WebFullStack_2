@@ -2,17 +2,18 @@ package com.sunwoo.s1.bankbook;
 
 public class BankBookDTO {
 	
-	private int booknumber;
+	private long booknumber;
 	private String bookname;
 	private double bookrate;
 	private String booksale;
 	
-	public int getBooknumber() {
+	public long getBooknumber() {
 		return booknumber;
 	}
-	public void setBooknumber(int booknumber) {
+	public void setBooknumber(long booknumber) {
 		this.booknumber = booknumber;
 	}
+
 	public String getBookname() {
 		return bookname;
 	}

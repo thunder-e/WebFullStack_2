@@ -17,7 +17,8 @@ import com.sunwoo.s1.util.ActionFoward;
 @WebServlet("/BankBookController")
 public class BankBookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
+      //멤버변수로 service 객체생성 
 	private BankBookService bankBookService;
     /**
      * @see HttpServlet#HttpServlet()
@@ -25,6 +26,15 @@ public class BankBookController extends HttpServlet {
     public BankBookController() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    public void init() throws ServletException {
+    	//Controller 객체 생성 후 자동 호출되는 초기화 메서드
+    	bankBookService = new BankBookService();
+    	BankBookDAO bankBookDAO = new BankBookDAO();
+    	bankBookService.setBankBookDAO(bankBookDAO);
+    	
     }
 
 
@@ -35,39 +45,29 @@ public class BankBookController extends HttpServlet {
 		//MemberController 참조
 		System.out.println("BankBook Controller!!!!");
 		
-		String path = request.getServletPath();
+		//	/WebFullStack_2/bankbook/bankbookList.do
 		String uri = request.getRequestURI();
-		System.out.println(path);
-		System.out.println(uri);
-		String result="";
 		
 		//subString으로 마지막주소 가져오기
 		//1. 자르려고 하는 인덱스번호 찾기
 		int index = uri.lastIndexOf("/");
 		
 		//2. 해당 인덱스부터 잘라오기
-		result = uri.substring(index);
-		System.out.println(result);
-		String pathInfo="";
-		
+		uri = uri.substring(index+1); //bankbookList.do
+	
 		ActionFoward actionFoward = null;
 		
-		if(result.equals("bankbookList.do")) {
-			System.out.println("리스트 출력");
-			try {
-				actionFoward = bankBookService.getList(request);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("에러 발생");
-				e.printStackTrace();
-			} 
-		} else {
-			System.out.println("그 외 다른 처리");
+		try {
+			if(uri.equals("bankbookList.do")) {
+				actionFoward = bankBookService.getList(request); //actionFoward - path정보, true false정보
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
-		
+		//forward, redirect
 		if(actionFoward.isCheck()) {
-			//foward
+			//forward
 			RequestDispatcher view = request.getRequestDispatcher(actionFoward.getPath());
 			view.forward(request, response);
 		} else {

@@ -12,6 +12,7 @@ public class BankBookDAO {
 	//getList
 	//bankbook table의 모든 데이터 조회 후 리턴
 	public List<BankBookDTO> getList() throws Exception {
+		ArrayList<BankBookDTO> ar = new ArrayList<>();
 		
 		
 		//1. 로그인 정보
@@ -38,15 +39,13 @@ public class BankBookDAO {
 		//7. 최종전송 후 처리
 		ResultSet rs = st.executeQuery();
 		
-		List<BankBookDTO> dtos = new ArrayList<>();
-		
-		if(rs.next()) {
+		while(rs.next()) {
 			BankBookDTO bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBooknumber(rs.getInt("bookname"));
+			bankBookDTO.setBooknumber(rs.getLong("booknumber"));
 			bankBookDTO.setBookname(rs.getString("bookname"));
 			bankBookDTO.setBookrate(rs.getDouble("bookrate"));
 			bankBookDTO.setBooksale(rs.getString("booksale"));
-			dtos.add(bankBookDTO);
+			ar.add(bankBookDTO);
 		}
 		
 	
@@ -56,7 +55,7 @@ public class BankBookDAO {
 		con.close();
 		
 		
-		return dtos;
+		return ar;
 		
 		
 		

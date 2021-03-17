@@ -1,5 +1,16 @@
+<%@page import="com.sunwoo.s1.bankbook.BankBookDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	List<BankBookDTO> ar = (List<BankBookDTO>)request.getAttribute("list");
+
+
+%>
+	
+	
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +53,34 @@
 			</ul>
 		</div>
 	</nav>
-
+	
+	<div class="container">
+		<div class="row"> 
+			<h1>BankBook List</h1>
+			
+			<table class="table table-hover"> 
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Rate</th>
+						<th>Sale</th>
+					</tr>
+			</table>
+			
+			<tbody>
+			<% for(int i=0;i<ar.size();i++) {%>
+				<tr>
+					<td><%=ar.get(i).getBookname() %></td>
+					<td><%=ar.get(i).getBookrate() %></td>
+					<td><%=ar.get(i).getBooksale() %></td>
+				</tr>
+			<%}  %>
+			</tbody>
+			
+			
+		
+		</div>
+	</div>
 
 
 
