@@ -9,6 +9,39 @@ import java.util.List;
 
 public class BankBookDAO {
 	
+	public int setWrite(BankBookDTO bankBookDTO) throws Exception {
+		
+		String user="user01";
+		String password="user01";
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		
+		Class.forName(driver);
+		
+		Connection con = DriverManager.getConnection(url, user, password);
+		
+		String sql = "insert into bankbook values (bank_seq.nextval, ?, ?, ?)";
+		
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, bankBookDTO.getBookName());
+		st.setDouble(2, bankBookDTO.getBookRate());
+		st.setString(3, bankBookDTO.getBookSale());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
 	public BankBookDTO getSelect(long bookNumber)throws Exception{
 		//1. 로그인 정보 
 		String user="user01";

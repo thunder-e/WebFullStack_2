@@ -12,8 +12,12 @@ public class BankBookDAOTest {
  
 		
 		try {
-			BankBookDTO bankBookDTO = bankBookDAO.getSelect(1);
-			System.out.println(bankBookDTO != null);
+	//		BankBookDTO bankBookDTO = new BankBookDTO();
+	//		int result = bankBookDAO.setWrite(bankBookDTO);
+	//		System.out.println(result);
+			
+			//BankBookDTO bankBookDTO = bankBookDAO.getSelect(1);
+			//System.out.println(bankBookDTO != null);
 			
 			//List<BankBookDTO> ar = bankBookDAO.getList();
 			//System.out.println(ar.size() != 0);

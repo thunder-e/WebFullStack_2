@@ -10,12 +10,32 @@ public class BankBookService {
 	//멤버변수로 선언 -> 다른 메서드에서도 쓸 수 있게. 객체는 하나만 있으면 되니까
 		
 		private BankBookDAO bankBookDAO;
-		
-		
+
 		
 		public void setBankBookDAO(BankBookDAO bankBookDAO) {
 			this.bankBookDAO = bankBookDAO;
 		}
+		
+		
+		public ActionFoward getWrite(HttpServletRequest request) throws Exception {
+			ActionFoward actionFoward = new ActionFoward();
+			String method = request.getMethod();
+			actionFoward.setPath("../WEB-INF/bankbook/bankbookWrite.jsp");
+			actionFoward.setCheck(true); 
+			if(method.toUpperCase().equals("GET")) {
+				BankBookDTO bankBookDTO = new BankBookDTO();
+				bankBookDTO.setBookNumber(Long.parseLong(request.getParameter("bookNumber")));
+				bankBookDTO.setBookName(request.getParameter("bookName"));
+				bankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")));
+				bankBookDTO.setBookSale(request.getParameter("bookSale"));
+				int result = bankBookDAO.setWrite(bankBookDTO);
+				actionFoward.setPath("../bankbook/bankbookList.do");
+				actionFoward.setCheck(false);
+			}
+			
+			return actionFoward;
+		}
+		
 
 
 		public ActionFoward getSelect(HttpServletRequest request)throws Exception{
@@ -47,6 +67,5 @@ public class BankBookService {
 		}
 		
 
-	}
-	
-
+		
+}

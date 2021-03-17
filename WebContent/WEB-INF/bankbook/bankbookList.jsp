@@ -70,6 +70,9 @@
 			
 		</table>
 		
+		
+		<a href="./bankbookWrite.do" class="btn btn-danger">WRITE</a>
+		
 	
 	</div>
 </div>
